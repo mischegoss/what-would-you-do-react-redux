@@ -1,17 +1,33 @@
 import React, { Component } from 'react';
-//import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 //import { Redirect, withRouter } from 'react-router-dom'
-//import { setAuthUser, removeAuthUser } from '../actions/authedUser';
+import { setAuthUser, removeAuthUser } from '../actions/authuser';
 
 class Login extends Component {
 
     render() {
+      
+        
         return (
-            <p>Stuff</p>
-
-        )
-    }
+            <div>
+              
+                {Object.key.usersProp.map(replyId => (
+                  <li key={replyId}>
+                    <p>{replyId}</p>
+                  </li>
+                ))}
+              
+            </div>
+          )
 
 }
+}
 
-export default Login;
+function mapStateToProps ({ users}) {
+    const usersProp = Object.keys(users)
+    return {
+      users: usersProp
+    }
+  }
+
+export default connect(mapStateToProps)(Login);
