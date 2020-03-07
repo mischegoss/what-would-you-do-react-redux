@@ -1,33 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 //import { Redirect, withRouter } from 'react-router-dom'
-import { setAuthUser, removeAuthUser } from '../actions/authuser';
+import { setAuthUser } from '../actions/authuser';
 
 class Login extends Component {
 
     render() {
       
-        
+        const {users} = this.props;
         return (
-            <div>
-              
-                {Object.key.usersProp.map(replyId => (
-                  <li key={replyId}>
-                    <p>{replyId}</p>
-                  </li>
-                ))}
-              
-            </div>
+
+            <div>This is where the Login Will Go</div>
           )
 
 }
 }
 
-function mapStateToProps ({ users}) {
-    const usersProp = Object.keys(users)
+function mapStateToProps ({users}) {  
     return {
-      users: usersProp
-    }
+      users
+    };
   }
 
 export default connect(mapStateToProps)(Login);
