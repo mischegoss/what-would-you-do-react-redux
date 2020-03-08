@@ -24,7 +24,7 @@ class Login extends Component {
 		const { dispatch } = this.props;
 	
 		dispatch(setAuthUser(userId));
-	
+	  //console.log(authedUser)
 		this.setState(function(previousState) {
 		  return {
 			...previousState,
@@ -43,6 +43,7 @@ class Login extends Component {
 
 		//if authenticated
 		if(authenticated) {
+
       return (
         <div>AUTHENTICATED</div>
       )
@@ -80,7 +81,7 @@ class Login extends Component {
 
 function mapStateToProps ({users}) {  
     return {
-      users,
+      users
     };
   }
   export default /*withRouter*/(connect(mapStateToProps)(Login));

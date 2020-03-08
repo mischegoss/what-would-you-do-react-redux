@@ -1,21 +1,34 @@
 import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
+import { connect } from 'react-redux'
 
-function NavBar() {
+
+class NavBar extends React.Component {
+    render() {
+        const {authedUser} = this.props
+    
     return (
      
-        
+ 
         <Navbar>
   <Navbar.Brand href="#home">Would You Rather?</Navbar.Brand>
   <Navbar.Toggle />
   <Navbar.Collapse className="justify-content-end">
     <Navbar.Text>
-      Signed in as: <a href="#login">Mark Otto</a>
+      Signed in as: {`Avatar of ${authedUser}`}
     </Navbar.Text>
   </Navbar.Collapse>
 </Navbar>
     )
   }
-  
-  export default NavBar;
+}
+function mapStateToProps( { authedUser, users}, props) {
+    return {
+        authedUser,
+        users,
+        user: users[authedUser]
+    }
+
+}
+export default connect(mapStateToProps)(NavBar)
   
