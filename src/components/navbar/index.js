@@ -6,7 +6,7 @@ function NavBar() {
      
         
         <Navbar>
-  <Navbar.Brand href="#home">Navbar with text</Navbar.Brand>
+  <Navbar.Brand href="#home">Would You Rather?</Navbar.Brand>
   <Navbar.Toggle />
   <Navbar.Collapse className="justify-content-end">
     <Navbar.Text>
