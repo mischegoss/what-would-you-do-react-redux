@@ -23,7 +23,7 @@ class NavBar extends React.Component {
         </Navbar.Text>
         ) : (
             <Navbar.Text>
-          Logged In
+          Logged Out
           </Navbar.Text>
         )    
   

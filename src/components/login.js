@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { setAuthUser} from '../actions/authuser';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 class Login extends Component {
+
+  
 	state = {
 		userId: null,
 		authenticated: false,
 	}
 	
-	handleSelectionChanged = function(event) {
-		const userId = event.target.value;
+  handleSelectionChanged = function(event) {
+    const userId = event.target.value;
+    console.log(userId)
 	
 		this.setState(function(previousState) {
 		  return {
@@ -24,11 +29,11 @@ class Login extends Component {
 		const { dispatch } = this.props;
 	
 		dispatch(setAuthUser(userId));
-	  //console.log(authedUser)
+	  console.log(userId)
 		this.setState(function(previousState) {
 		  return {
 			...previousState,
-			authenticated: true,
+			authenticate: true,
 		  };
 		});
 	}
@@ -37,9 +42,9 @@ class Login extends Component {
     render() {
 		const { userId, authenticated } = this.state;
     const { users } = this.props;
-    console.log(users)
+    
 		//const { from } = this.props.location.state || { from: { pathname: '/dashboard'}}
-		const selected = userId ? userId : -1
+		//const selected = userId ? userId : -1
 
 		//if authenticated
 		if(authenticated) {
@@ -51,33 +56,65 @@ class Login extends Component {
 		}
         
         return (
-		    <div className='tile-item login'>
-		        <div className="tile-header"><div>Welcome To Would You Rather App</div></div>
-		        <div className='user-select'>
-					<div>Please sign in to continue</div>
-					<select id="login-select" value={selected} onChange={(event) => this.handleSelectionChanged(event)}>
-						<option value="-1" disabled>Select user...</option>
-						{Object.keys(users).map(function(key) {
-							return (
-								<option value={users[key].id} key={key}>
-									{users[key].name}
-								</option>
-							);
-						})}
-					</select>
-				</div>
+<Card>
+  <Card.Body>
 
-				<button
-					className='btn'
-					disabled={userId === null}
-					onClick={(event) => this.handleLogin(event)}>
-					Login
-				</button>
-			
+  <h2>Pick Your House to Play</h2>
+				   <ul>
+						{Object.keys(users).map((key)=> {
+							return (
+                <li>
+                <Button 
+                
+                onClick={(event) => this.handleSelectionChanged(event)}
+                value={users[key].id} 
+                className={users[key].id}
+                key={key}
+                
+               >
+									{users[key].name}
+                 
+								</Button>
+                </li>
+							)
+						})}
+				</ul>
+
+        <div>
+    {this.state.userId != null ? (
+        
+<Button
+ onClick={(event) => this.handleLogin(event)}>
+   {`You picked ${this.state.userId}. Click here to play`}
+
+ </Button>
+
+
+        ) : (
+            <div>
+          Pick your House above!
           </div>
+        )    
+  
+        }
+        </div>
+
+
+
+
+
+
+
+
+
+  </Card.Body>
+</Card>
+
+  
+				
 		);  
-    }
-}
+    
+          }}
 
 function mapStateToProps ({users}) {  
     return {
