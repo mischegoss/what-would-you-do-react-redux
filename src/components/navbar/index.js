@@ -6,17 +6,29 @@ import { connect } from 'react-redux'
 class NavBar extends React.Component {
     render() {
         const {authedUser} = this.props
+        
+        
     
     return (
      
  
         <Navbar>
-  <Navbar.Brand href="#home">Would You Rather?</Navbar.Brand>
+  <Navbar.Brand >Would You Rather?</Navbar.Brand>
   <Navbar.Toggle />
   <Navbar.Collapse className="justify-content-end">
-    <Navbar.Text>
-      Signed in as: {`Avatar of ${authedUser}`}
-    </Navbar.Text>
+    <div>
+    {authedUser != null ? (
+        <Navbar.Text>
+        {`Welcome ${authedUser}`}
+        </Navbar.Text>
+        ) : (
+            <Navbar.Text>
+          Logged In
+          </Navbar.Text>
+        )    
+  
+        }
+        </div>
   </Navbar.Collapse>
 </Navbar>
     )
@@ -31,4 +43,6 @@ function mapStateToProps( { authedUser, users}, props) {
 
 }
 export default connect(mapStateToProps)(NavBar)
+
+
   

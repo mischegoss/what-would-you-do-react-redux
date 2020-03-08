@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-//import { handleInitialData } from '../src/actions/getdata';
+
 import reducers from './reducers'
 import middleware from './middleware'
 import { createStore } from 'redux'
