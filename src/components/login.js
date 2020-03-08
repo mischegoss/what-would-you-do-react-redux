@@ -85,4 +85,3 @@ function mapStateToProps ({users}) {
 
 export default connect(mapStateToProps)(Login);
 
-S
