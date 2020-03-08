@@ -3,6 +3,7 @@ import { handleInitialData } from './actions/getdata'
 import { connect } from 'react-redux'
 import Login from './components/login'
 import NavBar from './components/navbar'
+//import AuthRoute from './userauthroute'
 //import { render } from '@testing-library/react';
 
 class App extends React.Component {
