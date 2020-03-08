@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { setAuthUser} from '../actions/authUser';
+import { setAuthUser} from '../actions/authuser';
 
 class Login extends Component {
 	state = {
@@ -36,7 +36,8 @@ class Login extends Component {
 
     render() {
 		const { userId, authenticated } = this.state;
-		const { users } = this.props;
+    const { users } = this.props;
+    console.log(users)
 		//const { from } = this.props.location.state || { from: { pathname: '/dashboard'}}
 		const selected = userId ? userId : -1
 
@@ -82,6 +83,5 @@ function mapStateToProps ({users}) {
       users,
     };
   }
-
-export default connect(mapStateToProps)(Login);
+  export default /*withRouter*/(connect(mapStateToProps)(Login));
 
