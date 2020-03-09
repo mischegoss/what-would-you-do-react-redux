@@ -40,20 +40,10 @@ class Login extends Component {
 	
 
     render() {
-		const { userId, authenticated } = this.state;
+	
     const { users } = this.props;
     
-		//const { from } = this.props.location.state || { from: { pathname: '/dashboard'}}
-		//const selected = userId ? userId : -1
-
-		//if authenticated
-		if(authenticated) {
-
-      return (
-        <div>AUTHENTICATED</div>
-      )
-      
-		}
+	
         
         return (
 <Card>
