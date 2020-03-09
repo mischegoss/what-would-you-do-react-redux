@@ -63,7 +63,7 @@ class Login extends Component {
 				   <ul>
 						{Object.keys(users).map((key)=> {
 							return (
-                <li>
+                <li  key={key}>
                 <Button 
                 
                 onClick={(event) => this.handleSelectionChanged(event)}
