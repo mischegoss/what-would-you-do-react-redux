@@ -41,7 +41,7 @@ class QuestionDetail extends Component {
                 )}
                 <div className="tile-body">
                     <div className="tile-left">
-                        <img alt="avatar" className="avatar" src={`/${author.avatarURL}`}/>
+                        <img alt="avatar" className="avatar" />
                     </div>
                     
                     {!answered ? (
