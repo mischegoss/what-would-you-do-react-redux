@@ -22,9 +22,9 @@ render() {
         <NavBar />
           <div className="main-content"> 
             <Switch>
-              <Route path="/" exact component={QuestionBoard}/>
-              <Route path='/dashboard' exact component={QuestionBoard} />
-             
+              <Route path="/" exact component={Login}/>
+              
+              <Route path="/dashboard" exact component={QuestionBoard}/>
               <Route path='/question/:id' component={QuestionDetail} />
               
               <Route path="/not-found" component={NotFound} />

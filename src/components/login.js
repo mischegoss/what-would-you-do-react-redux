@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { setAuthUser} from '../actions/authuser';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { Link } from 'react-router-dom';
+
 
 class Login extends Component {
 
@@ -72,13 +74,13 @@ class Login extends Component {
 
         <div>
     {this.state.userId != null ? (
-        
+ <Link to="/dashboard">       
 <Button
  onClick={(event) => this.handleLogin(event)}>
    {`You picked ${this.state.userId}. Click here to play`}
 
  </Button>
-
+ </Link>
 
         ) : (
             <div>
