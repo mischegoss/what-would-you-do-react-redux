@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-//import { Link } from 'react-router-dom'
-//import QuestionTile from './QuestionTile'
+import { Link } from 'react-router-dom'
+import Button from 'react-bootstrap/Button';
 import Question from './question'
 
 class QuestionBoard extends Component {
@@ -29,14 +29,18 @@ class QuestionBoard extends Component {
         return (
             <div>
                 <div className="btn-group">
-                    <button className={ !showAnswered ? 'btn-selected' : 'btn-default'} onClick={(e) => this.filterQuestions(false)}>Unanswered Questions</button>
-                    <button className={ showAnswered ? 'btn-selected' : 'btn-default'} onClick={(e) => this.filterQuestions(true)}>Answered Questions</button>
+                    <Button className={ !showAnswered ? 'btn-selected' : 'btn-default'} onClick={(e) => 
+                        this.filterQuestions(false)}>Unanswered Questions</Button>
+                    <Button className={ showAnswered ? 'btn-selected' : 'btn-default'} onClick={(e) => 
+                        this.filterQuestions(true)}>Answered Questions</Button>
                 </div>
 
                 <ul className="questions-list">
                     {sortedQuestions.map((question) => (
                         <li key={question.id}>
-                           
+                            <Link to={`question/${question['id']}`}>
+                                <Question id={question.id}/>
+                            </Link>
                         </li>
                     ))}
                 </ul>
@@ -53,3 +57,4 @@ function mapStateToProps( { questions, authedUser }) {
 }
 
 export default connect(mapStateToProps)(QuestionBoard);
+
