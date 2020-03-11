@@ -1,6 +1,8 @@
 import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import {Link, NavLink} from 'react-router-dom';
+
 
 
 class NavBar extends React.Component {
@@ -14,16 +16,32 @@ class NavBar extends React.Component {
  
         <Navbar>
   <Navbar.Brand >Would You Rather?</Navbar.Brand>
+  
   <Navbar.Toggle />
   <Navbar.Collapse className="justify-content-end">
     <div>
     {authedUser != null ? (
+      <div>
+        <NavLink to='/dashboard' exact activeClassName='active'>
+        Home      |
+    </NavLink>
+    <NavLink to='/leaderboard' exact activeClassName='active'>
+        Leaderboard      |
+    </NavLink>
+    <NavLink to='/add' exact activeClassName='active'>
+        Add Question     |
+    </NavLink>
         <Navbar.Text>
         {`Welcome ${authedUser}`}
         </Navbar.Text>
+
+        <NavLink tag={Link} to='/logout'>Logout</NavLink>
+            
+       
+        </div>
         ) : (
             <Navbar.Text>
-          Logged Out
+           
           </Navbar.Text>
         )    
   

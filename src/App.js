@@ -4,8 +4,10 @@ import { connect } from 'react-redux'
 import Login from './components/login'
 import NavBar from './components/navbar'
 import QuestionBoard from './components/questionboard'
+import AddQuestion from './components/newquestion'
 import QuestionDetail from './components/questiondetail'
 import NotFound from './components/notfound'
+import Logout from './components/logout'
 import Leaderboard from './components/leaderboard'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ProtectedRoute from './components/protectedroutes'
@@ -16,7 +18,7 @@ class App extends React.Component {
     this.props.dispatch(handleInitialData())
 }
 render() {
-  const {authedUser} = this.props
+ 
   return (
     <Router>
 				<Fragment>
@@ -26,7 +28,8 @@ render() {
 								<Switch>
 									<Route path="/" exact component={Login}/>
 									<ProtectedRoute path='/dashboard' exact component={QuestionBoard} />
-								
+                  <ProtectedRoute path='/add' exact component={AddQuestion} />
+								  <Route path = '/logout' exact component= {Logout}></Route>
 									<ProtectedRoute path='/question/:id' component={QuestionDetail} />
 									<ProtectedRoute path='/leaderboard' component={Leaderboard} />
 									<Route path="/not-found" component={NotFound} />
