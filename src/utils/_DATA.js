@@ -2,7 +2,7 @@ let users = {
     Hufflepuff: {
       id: 'Hufflepuff',
       name: 'Hufflepuff',
-      avatarURL: '' ,
+      avatarURL: 'https://api.adorable.io/avatars/200/Hufflepuff.png' ,
       answers: {
         "8xf0y6ziyjabvozdd253nd": 'optionOne',
         "6ni6ok3ym7mf1p33lnez": 'optionTwo',
@@ -14,7 +14,7 @@ let users = {
     Gryffindor: {
       id: 'Gryffindor',
       name: 'Gryffindor',
-      avatarURL:'' ,
+      avatarURL:'https://api.adorable.io/avatars/200/Gryffindor.png' ,
       answers: {
         "vthrdm985a262al8qx3do": 'optionOne',
         "xj352vofupe1dqz9emx13r": 'optionTwo',
@@ -24,7 +24,7 @@ let users = {
     Ravenclaw: {
       id: 'Ravenclaw',
       name: 'Ravenclaw',
-      avatarURL: '',
+      avatarURL: 'https://api.adorable.io/avatars/200/Ravenclaw.png',
       answers: {
         "xj352vofupe1dqz9emx13r": 'optionOne',
         "vthrdm985a262al8qx3do": 'optionTwo',
@@ -35,7 +35,7 @@ let users = {
     Slytherin: {
       id: 'Slytherin',
       name: 'Slytherin',
-      avatarURL: '',
+      avatarURL: 'https://api.adorable.io/avatars/200/Slytherin.png',
       answers: {
         "xj352vofupe1dqz9emx13r": 'optionTwo',
         "vthrdm985a262al8qx3do": 'optionTwo'

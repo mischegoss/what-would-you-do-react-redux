@@ -4,7 +4,10 @@ import { Link } from 'react-router-dom'
 import Button from 'react-bootstrap/Button';
 import Question from './question'
 
+
 class QuestionBoard extends Component {
+   
+    
     state = {
         showAnswered: false
     }
@@ -14,7 +17,12 @@ class QuestionBoard extends Component {
         })
         
     }
+
+
+   
+
     render() {
+        
         const { showAnswered } = this.state;
         const { questions, authedUser } = this.props
         const questionsArray = Object.values(questions)
@@ -26,6 +34,9 @@ class QuestionBoard extends Component {
             return showAnswered ? contains : !contains;
         });
         const sortedQuestions = filteredQuestions.sort((a, b) => b.timestamp - a.timestamp);
+
+
+        
         return (
             <div>
                 <div className="btn-group">

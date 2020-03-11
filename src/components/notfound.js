@@ -6,7 +6,7 @@ class NotFound extends Component {
         <Alert variant="success">
         <Alert.Heading>OH NO! 404 / Not Found </Alert.Heading>
         <p>
-         Looks like something went wrong 😞😞😞
+         Looks like something went wrong 
         </p>
        
       </Alert>

@@ -91,14 +91,6 @@ class Login extends Component {
         }
         </div>
 
-
-
-
-
-
-
-
-
   </Card.Body>
 </Card>
 
@@ -113,5 +105,5 @@ function mapStateToProps ({users}) {
       users
     };
   }
-  export default /*withRouter*/(connect(mapStateToProps)(Login));
+  export default (connect(mapStateToProps)(Login));
 

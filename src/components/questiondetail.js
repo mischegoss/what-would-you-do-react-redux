@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { handleAddAnswer } from '../actions/questions'
+import { handleAddAnswer,  } from '../actions/questions'
 import { Redirect } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import Alert from 'react-bootstrap/Alert';
+import { Link } from 'react-router-dom';
 
 class QuestionDetail extends Component {
     state = {
@@ -29,7 +33,7 @@ class QuestionDetail extends Component {
         const { selectedAnswer } = this.state;
 
         if (!question) {
-            return <Redirect to="/not-found"/>
+            return <Redirect to="/notfound"/>
         }
 
         return (
@@ -37,43 +41,59 @@ class QuestionDetail extends Component {
             {answered ? (
                     <div className="tile-header">Asked by {author.name}</div>
                 ) : (
-                    <div className="tile-header">{author.name} asks</div>
+                    <div className="tile-header">{author.name} wants to know...</div>
                 )}
                 <div className="tile-body">
                     <div className="tile-left">
-                        <img alt="avatar" className="avatar" />
+                        <img alt="avatar" className="avatar" src= {author.avatarURL} />
                     </div>
                     
                     {!answered ? (
-                        <div className="question-body">
+                        <Card>
                             <div className="would-you">Would you rather</div>
-                            <div className={selectedAnswer === 'optionOne' ? 'option option-selected' : 'option'} onClick={(e) => { this.chooseAnswer('optionOne')}}>{question.optionOne.text}</div>
-                            <div className={selectedAnswer === 'optionTwo' ? 'option option-selected' : 'option'} onClick={(e) => { this.chooseAnswer('optionTwo')}}>{question.optionTwo.text}</div>
-                            <button className={ selectedAnswer ? 'btn-default' : 'disabled'} onClick={(e) => {this.handleSaveAnswer(e)}}>Submit</button>
-                        </div>
+                            <Button className={selectedAnswer === 'optionOne' ? 'option option-selected' : 'option'} 
+                            onClick={(e) => { this.chooseAnswer('optionOne')}}>{question.optionOne.text}</Button>
+
+                            <Button className={selectedAnswer === 'optionTwo' ? 'option option-selected' : 'option'}
+                             onClick={(e) => { this.chooseAnswer('optionTwo')}}>{question.optionTwo.text}</Button>
+
+{selectedAnswer ?
+                            (<Button className={ selectedAnswer ? 'btn-default' : 'disabled'} 
+                            onClick={(e) => {this.handleSaveAnswer(e)}}>Is that your final answer? Click here</Button>):
+                            (<div>Make your pick!</div>)}
+                        </Card>
                     ): (
-                        <div className="question-body">
+                        <Card>
                             <div className="would-you">Results: </div>
                             <div className={answer === 'optionOne' ? 'option-container selected': 'option-container'}>
                                 <div className="option-one">{question.optionOne.text}</div>
 
-                                <div className="poll-container">
+                                <Alert>
                                     <div>{votesOptionOne} out of {totalVotes} votes</div>
                                     <div>Percentage votes: {percentageOptionOne}%</div>
-                                </div>
-                                <div className="your-vote">Your pick</div>
-                            </div>
-
+                               
+                               
+                                </Alert>
+                             </div>
                             <div className={answer === 'optionTwo' ? 'option-container selected': 'option-container'}>
                                 <div className="option-two">{question.optionTwo.text}</div>
 
-                                <div className="poll-container">
+                                <Alert>
                                     <div>{votesOptionTwo} out of {totalVotes} votes</div>
                                     <div>Percentage votes: {percentageOptionTwo}%</div>
-                                </div>
-                                <div className="your-vote">Your pick</div>
-                            </div>
-                        </div>
+                                   
+                                </Alert>
+                                {selectedAnswer ? (<Alert>
+                                <div className="your-vote">Your pick is {this.state.selectedAnswer} </div> 
+                                </Alert>
+                                ): ( <div> {answer} </div>)}
+                                
+                                <Link to="/dashboard"> 
+                                <Button>Return to Dashboard</Button>
+                                </Link>
+                                
+                          </div>
+                        </Card>
                     )}
                     
                 </div>
@@ -94,7 +114,7 @@ function mapStateToProps ({authedUser, users, questions}, { match }) {
     const percentageOptionTwo = ((votesOptionTwo / totalVotes) * 100).toFixed(1)
 
     //get answer of authedUser
-    //const answer = users[authedUser].answers[id]
+    const answer = users[authedUser].answers[question.id]
   
     return {
         id,
@@ -102,7 +122,7 @@ function mapStateToProps ({authedUser, users, questions}, { match }) {
         question,
         author,
         answered,
-      
+        answer,
         votesOptionOne,
         votesOptionTwo,
         totalVotes,
