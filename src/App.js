@@ -1,4 +1,4 @@
-
+import React, { Fragment } from 'react';
 import { handleInitialData } from './actions/getdata'
 import { connect } from 'react-redux'
 import Login from './components/login'
@@ -8,7 +8,7 @@ import QuestionDetail from './components/questiondetail'
 import NotFound from './components/notfound'
 import Leaderboard from './components/leaderboard'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { Fragment } from 'react';
+import ProtectedRoute from './components/protectedroutes'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 class App extends React.Component {
@@ -16,26 +16,25 @@ class App extends React.Component {
     this.props.dispatch(handleInitialData())
 }
 render() {
+  const {authedUser} = this.props
   return (
     <Router>
-    <Fragment>
-      <div className='container'>
-        <NavBar />
-          <div className="main-content"> 
-            <Switch>
-              <Route path="/" exact component={Login}/>
-              <Route path="/login" exact component={Login}/>
-              
-              <Route path="/dashboard" exact component={QuestionBoard}/>
-              <Route path='/question/:id' component={QuestionDetail} />
-              <Route path='/leaderboard' component={Leaderboard} />
-              
-              <Route path="/notfound" component={NotFound} />
-            </Switch>
-          </div>
-      </div>
-    </Fragment>
-  </Router>
+				<Fragment>
+					<div className='container'>
+						<NavBar />
+							<div className="main-content"> 
+								<Switch>
+									<Route path="/" exact component={Login}/>
+									<ProtectedRoute path='/dashboard' exact component={QuestionBoard} />
+								
+									<ProtectedRoute path='/question/:id' component={QuestionDetail} />
+									<ProtectedRoute path='/leaderboard' component={Leaderboard} />
+									<Route path="/not-found" component={NotFound} />
+								</Switch>
+							</div>
+					</div>
+				</Fragment>
+			</Router>
   )
 }
 }
