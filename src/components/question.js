@@ -15,6 +15,7 @@ class Question extends Component {
   <Card.Img variant="top" src= {`https://api.adorable.io/avatars/200/${question.author}.png`} />
   <Card.Body>
     <Card.Title>{question.author} asks...</Card.Title>
+    <Card.Title>WOULD YOU RATHER...</Card.Title>
     <Card.Text>
     <div className="question-text">{question.optionOne.text}...</div>
     

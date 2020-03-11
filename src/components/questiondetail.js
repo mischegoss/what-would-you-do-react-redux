@@ -86,7 +86,7 @@ class QuestionDetail extends Component {
                                 {selectedAnswer ? (<Alert>
                                 <div className="your-vote">Your pick is {this.state.selectedAnswer} </div> 
                                 </Alert>
-                                ): ( <div> {answer} </div>)}
+                                ): ( <div> You picked {answer} </div>)}
                                 
                                 <Link to="/dashboard"> 
                                 <Button>Return to Dashboard</Button>

@@ -32,7 +32,7 @@ class NavBar extends React.Component {
         Add Question     |
     </NavLink>
         <Navbar.Text>
-        {`Welcome ${authedUser}`}
+        {`Welcome ${authedUser}`}        |
         </Navbar.Text>
 
         <NavLink tag={Link} to='/logout'>Logout</NavLink>
@@ -41,7 +41,7 @@ class NavBar extends React.Component {
         </div>
         ) : (
             <Navbar.Text>
-           
+           (Pick your House to get started and enable NavBar links)
           </Navbar.Text>
         )    
   

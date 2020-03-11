@@ -27,6 +27,8 @@ render() {
 							<div className="main-content"> 
 								<Switch>
 									<Route path="/" exact component={Login}/>
+                  <Route path="/login" exact component={Login}/>
+                 
 									<ProtectedRoute path='/dashboard' exact component={QuestionBoard} />
                   <ProtectedRoute path='/add' exact component={AddQuestion} />
 								  <Route path = '/logout' exact component= {Logout}></Route>

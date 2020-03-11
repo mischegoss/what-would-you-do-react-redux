@@ -51,6 +51,7 @@ class AddQuestion extends Component {
             <Form onSubmit={this.handleSubmit}>
 
             <div> Create New Question </div>
+            <div> Would You Rather... </div>
           
             <Form.Group controlId="formBasicPassword">
               <Form.Label>Option One</Form.Label>
