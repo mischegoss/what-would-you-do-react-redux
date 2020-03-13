@@ -4,6 +4,7 @@ import { handleAddQuestion } from  '../actions/questions'
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { NavLink} from 'react-router-dom'
 
 class AddQuestion extends Component {	
 
@@ -18,7 +19,9 @@ class AddQuestion extends Component {
     
             this.setState((state) => {
                 return type === 'option1' ? {...state, optionOneText: value} : {...state, optionTwoText: value}
-            });
+            })
+
+            
         }
     
         handleSubmit = (event) => {   
@@ -34,8 +37,7 @@ class AddQuestion extends Component {
     
             this.setState({
                 optionOneText:'',
-                optionTwoText:'',
-                toHome: true
+                optionTwoText:''
               })
           }
      
@@ -76,11 +78,11 @@ class AddQuestion extends Component {
              onChange={(event) => this.handleInputChange(event, 'option2')} />
 
              </Form.Group>
-
+             <NavLink to="/dashboard">
              <Button variant="primary" type="submit">
     Submit
   </Button>
-
+  </NavLink >
           </Form>
 
         

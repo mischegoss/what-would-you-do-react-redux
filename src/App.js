@@ -7,40 +7,70 @@ import QuestionBoard from './components/questionboard'
 import AddQuestion from './components/newquestion'
 import QuestionDetail from './components/questiondetail'
 import NotFound from './components/notfound'
-import Logout from './components/logout'
+
 import Leaderboard from './components/leaderboard'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { getAuthUser} from './actions/authuser';
 import ProtectedRoute from './components/protectedroutes'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import {BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 
 class App extends React.Component {
-  componentDidMount() {
-    this.props.dispatch(handleInitialData())
-}
-render() {
- 
-  return (
-    <Router>
-				<Fragment>
-					<div className='container'>
-						<NavBar />
-							<div className="main-content"> 
-								<Switch>
-									<Route path="/" exact component={Login}/>
-                  <Route path="/login" exact component={Login}/>
-                 
-									<ProtectedRoute path='/dashboard' exact component={QuestionBoard} />
-                  <ProtectedRoute path='/add' exact component={AddQuestion} />
-								  <Route path = '/logout' exact component= {Logout}></Route>
-									<ProtectedRoute path='/question/:id' component={QuestionDetail} />
-									<ProtectedRoute path='/leaderboard' component={Leaderboard} />
-									<Route path="/not-found" component={NotFound} />
-								</Switch>
-							</div>
-					</div>
-				</Fragment>
-			</Router>
-  )
-}
-}
-export default connect()(App);
+
+	componentDidMount() {
+	  this.props.getAuth(getAuthUser())
+	  this.props.getData(handleInitialData())
+	}
+  
+	guestRoutes = () => (
+	  <Switch>
+		<Route exact path='/' component={Login} />
+		<Redirect from='*' to='/' />
+	  </Switch>
+	)
+  
+	authedRoutes = () => (
+		<Switch>
+		
+		<Route path="/" exact component={QuestionBoard}/>
+		<Route path="/login" exact component={Login}/>
+		<ProtectedRoute path='/dashboard' exact component={QuestionBoard} />
+		<Route path='/add' exact component={AddQuestion} />
+		<ProtectedRoute path='/question/:id' component={QuestionDetail} />
+		<ProtectedRoute path='/leaderboard' component={Leaderboard} />
+		<Route path="/not-found" component={NotFound} />
+	</Switch>
+	)
+  
+
+  
+	render() {
+	  return (
+		<BrowserRouter>
+		  <Fragment>
+		
+			<div className="App">
+			  <NavBar />
+			  {this.props.displayLogin
+              ? this.guestRoutes()
+              : this.authedRoutes()}
+			</div>
+		  </Fragment>
+		</BrowserRouter>)
+	}
+  }
+  
+  function mapStateToProps ({ authedUser, questions }) {
+	return {
+	  loading: Object.keys(questions).length === 0,
+	  displayLogin: authedUser === null
+	}
+  }
+  
+  function mapDispatchToProps(dispatch) {
+	return {
+	  getData: () => dispatch(handleInitialData()),
+	  getAuth: () => dispatch(getAuthUser())
+	}
+  };
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(App)

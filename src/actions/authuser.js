@@ -20,3 +20,9 @@ export function removeAuthUser() {
   };
 }
 
+export const GET_AUTH_USER = 'GET_AUTH_USER'
+export function getAuthUser () {
+  return {
+    type: GET_AUTH_USER,
+  }
+}

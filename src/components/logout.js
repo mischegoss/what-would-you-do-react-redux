@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { removeAuthUser } from '../actions/authuser'
 
 class Logout extends Component {
@@ -8,8 +8,6 @@ class Logout extends Component {
     this.props.dispatch(removeAuthUser())
   }
   render () {
-    return <Redirect to='/' />
-  }
+   <Button
 }
-
 export default connect()(Logout)

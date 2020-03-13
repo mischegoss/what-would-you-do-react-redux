@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { setAuthUser} from '../actions/authuser';
+import { setAuthUser, removeAuthUser} from '../actions/authuser';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import { Link } from 'react-router-dom';
+
+import { NavLink, withRouter } from 'react-router-dom'
 
 
 class Login extends Component {
@@ -11,41 +12,53 @@ class Login extends Component {
   
 	state = {
 		userId: null,
-		authenticated: false,
+    redirectToReferrer: false
+    
 	}
 	
   handleSelectionChanged = function(event) {
     const userId = event.target.value;
     console.log(userId)
-	
+	  
 		this.setState(function(previousState) {
 		  return {
 			...previousState,
 			userId,
 		  };
 		});
-	}
+  }
+  
+
+  
 	
-	handleLogin = function(event) {
-		const { userId } = this.state;
+  handleLogin = function(event) {
+    
+  
+    const { userId } = this.state;
 		const { dispatch } = this.props;
 	
 		dispatch(setAuthUser(userId));
-	  console.log(userId)
+	
 		this.setState(function(previousState) {
 		  return {
-			...previousState,
-			authenticate: true,
+			...previousState
+		
 		  };
-		});
+    });
+    
 	}
-	
+   
+   
+
+  
   
     render() {
-	
-    const { users } = this.props;
+
+   
+      const { users } = this.props;
+      
+       
     
-	
         
         return (
 <Card>
@@ -74,13 +87,14 @@ class Login extends Component {
 
         <div>
     {this.state.userId != null ? (
- <Link to="/dashboard">       
+     
+<NavLink to="/dashboard">
 <Button
  onClick={(event) => this.handleLogin(event)}>
    {`You picked ${this.state.userId}. Click here to play`}
 
  </Button>
- </Link>
+ </NavLink>
 
         ) : (
             <div>
@@ -105,5 +119,5 @@ function mapStateToProps ({users}) {
       users
     };
   }
-  export default (connect(mapStateToProps)(Login));
+  export default withRouter(connect(mapStateToProps)(Login));
 

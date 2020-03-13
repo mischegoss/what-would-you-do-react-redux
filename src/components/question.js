@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 
+
 class Question extends Component {
     render() {
         const { question} = this.props;
@@ -16,12 +17,8 @@ class Question extends Component {
   <Card.Body>
     <Card.Title>{question.author} asks...</Card.Title>
     <Card.Title>WOULD YOU RATHER...</Card.Title>
-    <Card.Text>
-    <div className="question-text">{question.optionOne.text}...</div>
-    
-
-                        <Button className="btn-default">Vote/View Poll</Button>
-    </Card.Text>
+    <Card.Text>{question.optionOne.text}...</Card.Text>
+<Button>Vote/View Poll</Button>
    
   </Card.Body>
 </Card>

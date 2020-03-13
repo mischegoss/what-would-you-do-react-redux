@@ -113,7 +113,7 @@ function mapStateToProps ({authedUser, users, questions}, { match }) {
     const percentageOptionOne = ((votesOptionOne / totalVotes) * 100).toFixed(1)
     const percentageOptionTwo = ((votesOptionTwo / totalVotes) * 100).toFixed(1)
 
-    //get answer of authedUser
+   
     const answer = users[authedUser].answers[question.id]
   
     return {

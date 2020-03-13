@@ -56,7 +56,7 @@ function addAnswer({ authedUser, qid, answer }) {
 
 export function handleAddAnswer(info) {
     return (dispatch) => {
-        //assuming answer gets updated correctly
+        
         dispatch(addAnswer(info))
         return saveQuestionAnswer(info)
             .then(() => console.log('recorded answer'))

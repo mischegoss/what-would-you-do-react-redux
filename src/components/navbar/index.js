@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import { connect } from 'react-redux';
-import {Link, NavLink} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
 
 
@@ -35,7 +35,7 @@ class NavBar extends React.Component {
         {`Welcome ${authedUser}`}        |
         </Navbar.Text>
 
-        <NavLink tag={Link} to='/logout'>Logout</NavLink>
+        <NavLink to='/login'>Logout</NavLink>
             
        
         </div>

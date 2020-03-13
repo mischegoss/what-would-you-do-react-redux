@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import {withRouter} from 'react-router-dom'
 
 class Leaderboard extends Component {
     render() {
@@ -22,7 +23,7 @@ class Leaderboard extends Component {
                         </div>
                         <div className="user-created">
                             <span className="label">Created questions</span>
-                            <span className="value">{user.questions.length}</span>
+                            <span className="value">{Object.keys(user.questions).length}</span>
                         </div>
                     </div>
                     <div className="tile-section section-3">
@@ -45,4 +46,4 @@ function mapStateToProps( { users }) {
     }
 }
 
-export default connect(mapStateToProps)(Leaderboard);
+export default withRouter(connect(mapStateToProps)(Leaderboard));
