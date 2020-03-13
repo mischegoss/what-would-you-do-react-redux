@@ -34,9 +34,9 @@ class App extends React.Component {
 		<Route path="/" exact component={QuestionBoard}/>
 		<Route path="/login" exact component={Login}/>
 		<ProtectedRoute path='/dashboard' exact component={QuestionBoard} />
-		<Route path='/add' exact component={AddQuestion} />
+		<ProtectedRoute path='/add' exact component={AddQuestion} />
 		<ProtectedRoute path='/question/:id' component={QuestionDetail} />
-		<ProtectedRoute path='/leaderboard' component={Leaderboard} />
+		<Route path='/leaderboard' component={Leaderboard} />
 		<Route path="/not-found" component={NotFound} />
 	</Switch>
 	)

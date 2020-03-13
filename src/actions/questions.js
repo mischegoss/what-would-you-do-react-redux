@@ -33,14 +33,16 @@ export function handleAddQuestion(optionOneText, optionTwoText) {
             author: authedUser
         }
 
+      
+
         return saveQuestion(questionInfo)
             .then((question) => {
                 console.log('created QUESTION', question);
                 dispatch(addQuestion(question))
             })
             .catch( (error) => {
-                console.log('There was a problem saving question.')
-                alert('There was a problem creating new question. Try again ')
+                console.log('Did not work No question created.')
+               
             })
     }
 }
