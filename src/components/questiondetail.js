@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Alert from 'react-bootstrap/Alert';
 import { Link } from 'react-router-dom';
+import NotFound from './notfound'
 
 class QuestionDetail extends Component {
     state = {
@@ -32,9 +33,12 @@ class QuestionDetail extends Component {
         const { question, author, answered, answer, votesOptionOne, votesOptionTwo, totalVotes, percentageOptionOne, percentageOptionTwo } = this.props;
         const { selectedAnswer } = this.state;
 
-        if (!question) {
-            return <Redirect to="/notfound"/>
-        }
+        if ( !question )
+		{
+			return (
+				<NotFound/>
+			)
+		}
 
         return (
             <div className={answered ? 'tile-item question-detail' : 'tile-item'}>

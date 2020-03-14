@@ -8,11 +8,12 @@ import AddQuestion from './components/newquestion'
 import QuestionDetail from './components/questiondetail'
 import NotFound from './components/notfound'
 
+
 import Leaderboard from './components/leaderboard'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { getAuthUser} from './actions/authuser';
 
-import {BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
+import {HashRouter, Route, Switch, Redirect } from 'react-router-dom'
 
 class App extends React.Component {
 
@@ -31,13 +32,14 @@ class App extends React.Component {
 	authedRoutes = () => (
 		<Switch>
 		
-		<Route path="/" exact component={QuestionBoard}/>
+		<Route path="/" exact component={QuestionBoard} />
 		<Route path="/login" exact component={Login}/>
 		<Route path='/dashboard' exact component={QuestionBoard} />
 		<Route path='/add' exact component={AddQuestion} />
 		<Route path='/question/:id' component={QuestionDetail} />
 		<Route path='/leaderboard' component={Leaderboard} />
-		<Route path="/not-found" component={NotFound} />
+		<Route path='/notfound' component={NotFound} />
+		<Redirect from='*' to='/notfound' />
 	</Switch>
 
 
@@ -46,8 +48,9 @@ class App extends React.Component {
 
   
 	render() {
+		
 	  return (
-		<BrowserRouter>
+		<HashRouter>
 		  <Fragment>
 		
 			<div className="App">
@@ -57,13 +60,13 @@ class App extends React.Component {
               : this.authedRoutes()}
 			</div>
 		  </Fragment>
-		</BrowserRouter>)
+		</HashRouter>)
 	}
   }
   
   function mapStateToProps ({ authedUser, questions }) {
 	return {
-	  loading: Object.keys(questions).length === 0,
+	
 	  displayLogin: authedUser === null
 	}
   }
