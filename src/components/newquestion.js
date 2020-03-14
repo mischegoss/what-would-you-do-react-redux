@@ -4,7 +4,7 @@ import { handleAddQuestion } from  '../actions/questions'
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-
+import { Redirect} from 'react-router-dom';
 
 class AddQuestion extends Component {	
 
@@ -12,6 +12,7 @@ class AddQuestion extends Component {
         state = {      
             optionOneText:'',
             optionTwoText:'',
+            toDashboard: false
         };
     
         handleInputChange = (event, type) => {
@@ -28,7 +29,7 @@ class AddQuestion extends Component {
             event.preventDefault();
     
             const { dispatch } = this.props
-            const { optionOneText, optionTwoText} = this.state   
+            const {  optionOneText, optionTwoText} = this.state   
         
             dispatch(handleAddQuestion(
                   optionOneText,
@@ -37,13 +38,19 @@ class AddQuestion extends Component {
     
             this.setState({
                 optionOneText:'',
-                optionTwoText:''
+                optionTwoText:'',
+                toDashboard: true
               })
           }
      
 
  
 	render() {
+        const { toDashboard } = this.state;
+        if (toDashboard) {
+			
+			return <Redirect to='/dashboard' />
+		}
 
 		return (
             
@@ -84,8 +91,7 @@ class AddQuestion extends Component {
   </Button>
 
           </Form>
-
-        
+ 
 
 
 

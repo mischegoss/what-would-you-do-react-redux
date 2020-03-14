@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { setAuthUser, removeAuthUser} from '../actions/authuser';
+import { setAuthUser} from '../actions/authuser';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
@@ -120,4 +120,5 @@ function mapStateToProps ({users}) {
     };
   }
   export default withRouter(connect(mapStateToProps)(Login));
+
 
