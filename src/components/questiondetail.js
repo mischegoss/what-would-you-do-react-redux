@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { handleAddAnswer,  } from '../actions/questions'
-import { Redirect } from 'react-router-dom';
+
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Alert from 'react-bootstrap/Alert';
 import { Link } from 'react-router-dom';
-import NotFound from './notfound'
+
 
 class QuestionDetail extends Component {
     state = {
@@ -33,10 +33,10 @@ class QuestionDetail extends Component {
         const { question, author, answered, answer, votesOptionOne, votesOptionTwo, totalVotes, percentageOptionOne, percentageOptionTwo } = this.props;
         const { selectedAnswer } = this.state;
 
-        if ( !question )
+        if (question == null)
 		{
 			return (
-				<NotFound/>
+				<div>404 Not Found. Please log in</div>
 			)
 		}
 
@@ -117,10 +117,12 @@ function mapStateToProps ({authedUser, users, questions}, { match }) {
     const percentageOptionOne = ((votesOptionOne / totalVotes) * 100).toFixed(1)
     const percentageOptionTwo = ((votesOptionTwo / totalVotes) * 100).toFixed(1)
 
-   
-    const answer = users[authedUser].answers[question.id]
+
+    const answer = users[authedUser].answers[question.id || -1]
+
   
     return {
+       
         id,
         authedUser,
         question,
