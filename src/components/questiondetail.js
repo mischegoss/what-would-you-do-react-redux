@@ -30,16 +30,18 @@ class QuestionDetail extends Component {
         })
     }
 
-    componentWillMount() {
-        if (!this.props.question) {
-          this.context.router.push('/notfound');
-        }
-      }
-    render() {
     
-        const { author, question,
-             answered, answer, votesOne, votesTwo, totalVotes, percentOne, percentTwo } = this.props;
-        const { selectedAnswer } = this.state;
+    render() {
+
+        const {question} = this.props
+
+        if (!question) {
+            return <Redirect to="/notfound"/>
+        }
+
+        const { author, 
+            answered, answer, votesOne, votesTwo, totalVotes, percentOne, percentTwo } = this.props;
+       const { selectedAnswer } = this.state;
 
         return (
           <div className={answered ? 'tile-item question-detail' : 'tile-item'}>
@@ -118,9 +120,9 @@ function mapStateToProps ({authedUser, users, questions}, { match }) {
     const percentOne = ((votesOne / totalVotes) * 100).toFixed(1)
     const percentTwo = ((votesTwo / totalVotes) * 100).toFixed(1)
 
-
-    const answer = users[authedUser].answers[question.id || -1]
-
+   
+    const answer = question ? (users[authedUser].answers[question.id || -1]) : null
+    
   
     return {
        
