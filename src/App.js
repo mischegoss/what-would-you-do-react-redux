@@ -6,7 +6,7 @@ import NavBar from './components/navbar'
 import QuestionBoard from './components/questionboard'
 import AddQuestion from './components/newquestion'
 import QuestionDetail from './components/questiondetail'
-import NotFound from './components/notfound'
+import Notfound from './components/notfound'
 import ProtectedRoute from './components/protectedroutes'
 import Leaderboard from  './components/leaderboard'
 
@@ -34,7 +34,7 @@ class App extends React.Component {
 									  <ProtectedRoute path='/add' exact component={AddQuestion} />
 									  <ProtectedRoute path='/question/:id' component={QuestionDetail} />
 									  <ProtectedRoute path='/leaderboard' component={Leaderboard} />
-									  <Route path="/not-found" component={NotFound} />
+									  <Route component={Notfound} />
 								  </Switch>
 							  </div>
 					  </div>

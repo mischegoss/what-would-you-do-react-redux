@@ -4,23 +4,25 @@ import { setAuthUser} from '../actions/authuser';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
-import { NavLink, withRouter, Redirect, useParams } from 'react-router-dom'
+import { withRouter, Redirect} from 'react-router-dom'
 
 
 class Login extends Component {
+
+ 
  
   
 	state = {
 		userId: null,
     redirectToReferrer: false,
-    redirect: null,
+  
 
     
 	}
 	
   handleSelectionChanged = function(event) {
     const userId = event.target.value;
-    console.log(userId)
+    
 	  
 		this.setState(function(previousState) {
 		  return {
@@ -36,7 +38,6 @@ class Login extends Component {
   handleLogin = function(event) {
     
    
-    let {id} = this.props.match.params;
     const { userId } = this.state;
 		const { dispatch } = this.props;
 	
@@ -46,7 +47,7 @@ class Login extends Component {
 		  return {
         ...previousState,
       redirectToReferrer: true,
-      redirect: id,
+      
 		
 		  };
     });
@@ -63,7 +64,7 @@ class Login extends Component {
    
       const { users } = this.props;
       const {redirectToReferrer} = this.state;
-      const { from } = this.props.id || { from: { pathname: '/QuestionBoard'}}
+      const { from } = this.props.location.state || { from: { pathname: '/dashboard'}}
        
       if(redirectToReferrer) {
         return <Redirect to={from} />
@@ -97,13 +98,13 @@ class Login extends Component {
         <div>
     {this.state.userId != null ? (
      
-<NavLink to="/dashboard">
+
 <Button
  onClick={(event) => this.handleLogin(event)}>
    {`You picked ${this.state.userId}. Click here to play`}
 
  </Button>
- </NavLink>
+
 
         ) : (
             <div>

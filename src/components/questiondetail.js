@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { handleAddAnswer,  } from '../actions/questions'
+import { handleAddAnswer} from '../actions/questions'
 
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Alert from 'react-bootstrap/Alert';
-import { Link } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 
 class QuestionDetail extends Component {
@@ -29,19 +29,20 @@ class QuestionDetail extends Component {
             return {selectedAnswer: answer}
         })
     }
+
+    componentWillMount() {
+        if (!this.props.question) {
+          this.context.router.push('/notfound');
+        }
+      }
     render() {
-        const { question, author, answered, answer, votesOptionOne, votesOptionTwo, totalVotes, percentageOptionOne, percentageOptionTwo } = this.props;
+    
+        const { author, question,
+             answered, answer, votesOne, votesTwo, totalVotes, percentOne, percentTwo } = this.props;
         const { selectedAnswer } = this.state;
 
-        if (question == null)
-		{
-			return (
-				<div>404 Not Found. Please log in</div>
-			)
-		}
-
         return (
-            <div className={answered ? 'tile-item question-detail' : 'tile-item'}>
+          <div className={answered ? 'tile-item question-detail' : 'tile-item'}>
             {answered ? (
                     <div className="tile-header">Asked by {author.name}</div>
                 ) : (
@@ -73,8 +74,8 @@ class QuestionDetail extends Component {
                                 <div className="option-one">{question.optionOne.text}</div>
 
                                 <Alert>
-                                    <div>{votesOptionOne} out of {totalVotes} votes</div>
-                                    <div>Percentage votes: {percentageOptionOne}%</div>
+                                    <div>{votesOne} out of {totalVotes} votes</div>
+                                    <div>Percentage votes: {percentOne}%</div>
                                
                                
                                 </Alert>
@@ -83,8 +84,8 @@ class QuestionDetail extends Component {
                                 <div className="option-two">{question.optionTwo.text}</div>
 
                                 <Alert>
-                                    <div>{votesOptionTwo} out of {totalVotes} votes</div>
-                                    <div>Percentage votes: {percentageOptionTwo}%</div>
+                                    <div>{votesTwo} out of {totalVotes} votes</div>
+                                    <div>Percentage votes: {percentTwo}%</div>
                                    
                                 </Alert>
                                 {selectedAnswer ? (<Alert>
@@ -111,11 +112,11 @@ function mapStateToProps ({authedUser, users, questions}, { match }) {
     const question = questions[id]
     const author = question ? users[question.author] : null
     const answered = question ? (question.optionOne.votes.indexOf(authedUser) > -1 || question.optionTwo.votes.indexOf(authedUser) > -1) : false
-    const votesOptionOne = (question && question.optionOne.votes) ? question.optionOne.votes.length : 0
-    const votesOptionTwo = (question && question.optionTwo.votes) ? question.optionTwo.votes.length : 0
-    const totalVotes = votesOptionOne + votesOptionTwo
-    const percentageOptionOne = ((votesOptionOne / totalVotes) * 100).toFixed(1)
-    const percentageOptionTwo = ((votesOptionTwo / totalVotes) * 100).toFixed(1)
+    const votesOne = (question && question.optionOne.votes) ? question.optionOne.votes.length : 0
+    const votesTwo = (question && question.optionTwo.votes) ? question.optionTwo.votes.length : 0
+    const totalVotes = votesOne + votesTwo
+    const percentOne = ((votesOne / totalVotes) * 100).toFixed(1)
+    const percentTwo = ((votesTwo / totalVotes) * 100).toFixed(1)
 
 
     const answer = users[authedUser].answers[question.id || -1]
@@ -129,14 +130,13 @@ function mapStateToProps ({authedUser, users, questions}, { match }) {
         author,
         answered,
         answer,
-        votesOptionOne,
-        votesOptionTwo,
+        votesOne,
+        votesTwo,
         totalVotes,
-        percentageOptionOne,
-        percentageOptionTwo
+        percentOne,
+        percentTwo
     }
 }
 
 export default connect(mapStateToProps)(QuestionDetail);
-
 

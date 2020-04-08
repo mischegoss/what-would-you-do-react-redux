@@ -35,7 +35,7 @@ class NavBar extends React.Component {
         {`Welcome ${authedUser}`}        |
         </Navbar.Text>
 
-        <NavLink to='/login'>Logout</NavLink>
+        <NavLink to='/'>Logout</NavLink>
             
        
         </div>

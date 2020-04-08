@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Alert from 'react-bootstrap/Alert';
-class NotFound extends Component {
+
+class Notfound extends Component {
   render() {
     return (
         <Alert variant="success">
@@ -14,4 +15,4 @@ class NotFound extends Component {
   }
 }
 
-export default NotFound
+export default Notfound
