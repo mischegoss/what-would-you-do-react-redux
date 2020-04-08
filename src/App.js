@@ -35,7 +35,7 @@ class App extends React.Component {
 									  <ProtectedRoute path='/question/:id' component={QuestionDetail} />
 									  <ProtectedRoute path='/leaderboard' component={Leaderboard} />
 			
-									  <ProtectedRoute path='/notfound' component={Notfound} /> 
+									  <Route path='/notfound' component={Notfound} /> 
 									   <Route component={Notfound} />
 								  </Switch>
 							  </div>
